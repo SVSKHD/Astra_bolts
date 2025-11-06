@@ -24,3 +24,5 @@ export interface Post {
   status: PostStatus;
   niche?: string;
 }
+
+export type ApiKeys = Partial<Record<SocialPlatform, string>>;

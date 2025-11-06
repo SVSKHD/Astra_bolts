@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Post, PostStatus, SocialPlatform } from '../types';
 import { InstagramIcon, FacebookIcon, TwitterIcon, LinkedInIcon, TikTokIcon, TrashIcon, TagIcon } from './IconComponents';
@@ -16,63 +15,67 @@ const platformIcons: { [key in SocialPlatform]: React.ElementType } = {
   [SocialPlatform.TikTok]: TikTokIcon,
 };
 
-const statusColors: { [key in PostStatus]: string } = {
-    [PostStatus.Scheduled]: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30',
-    [PostStatus.Published]: 'bg-green-500/20 text-green-300 border-green-500/30',
-    [PostStatus.Failed]: 'bg-red-500/20 text-red-300 border-red-500/30',
+const statusConfig: { [key in PostStatus]: { dot: string; text: string; } } = {
+    [PostStatus.Scheduled]: { dot: 'bg-yellow-400', text: 'text-yellow-300' },
+    [PostStatus.Published]: { dot: 'bg-green-400', text: 'text-green-300' },
+    [PostStatus.Failed]: { dot: 'bg-red-400', text: 'text-red-300' },
 };
 
 const PostCard: React.FC<PostCardProps> = ({ post, onDelete }) => {
   const formattedDate = new Intl.DateTimeFormat('en-US', {
-    dateStyle: 'medium',
-    timeStyle: 'short',
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
   }).format(post.scheduledAt);
 
   return (
-    <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col group relative">
-        <div className="absolute top-2 right-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
-            <button 
-                onClick={onDelete} 
-                className="p-2 bg-red-600/50 hover:bg-red-600 text-white rounded-full transition-colors"
-                aria-label="Delete post"
-            >
-                <TrashIcon className="w-5 h-5"/>
-            </button>
-        </div>
+    <div className="bg-[var(--bg-secondary)] rounded-xl shadow-lg overflow-hidden flex flex-col group relative border border-[var(--border-color)] hover:border-indigo-500/50 transition-all duration-300">
+        <button 
+            onClick={onDelete} 
+            className="absolute top-3 right-3 z-10 p-2 bg-red-600/50 hover:bg-red-600 text-white rounded-full transition-all scale-0 group-hover:scale-100 opacity-0 group-hover:opacity-100 duration-200"
+            aria-label="Delete post"
+        >
+            <TrashIcon className="w-5 h-5"/>
+        </button>
 
-      <div className="aspect-square w-full bg-gray-700">
+      <div className="relative aspect-square w-full bg-gray-700">
         {post.mediaType === 'image' ? (
           <img src={post.mediaPreviewUrl} alt="Post media" className="w-full h-full object-cover" />
         ) : (
-          <video src={post.mediaPreviewUrl} className="w-full h-full object-cover" controls />
+          <video src={post.mediaPreviewUrl} className="w-full h-full object-cover" muted loop playsInline />
         )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+        <div className="absolute bottom-0 left-0 p-4 w-full">
+            <div className="flex items-center space-x-2">
+                {post.platforms.map(platform => {
+                const Icon = platformIcons[platform];
+                return <Icon key={platform} className="w-5 h-5 text-gray-300" />;
+                })}
+            </div>
+        </div>
       </div>
+
       <div className="p-4 flex flex-col flex-grow">
-        <p className="text-gray-300 text-sm mb-4 flex-grow break-words whitespace-pre-wrap">{post.caption || <span className="text-gray-500">No caption</span>}</p>
+        <p className="text-[var(--text-primary)] text-sm mb-4 flex-grow break-words line-clamp-3">{post.caption || <span className="text-[var(--text-secondary)]">No caption provided</span>}</p>
         
-        <div className="mt-auto">
-            <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2 flex-wrap">
-                    <div className={`text-xs font-semibold px-2.5 py-0.5 rounded-full border ${statusColors[post.status]}`}>
-                        {post.status}
+        <div className="mt-auto space-y-3">
+            <div className="flex items-center gap-2 flex-wrap">
+                <div className={`flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-white/5`}>
+                    <span className={`w-2 h-2 rounded-full ${statusConfig[post.status].dot}`}></span>
+                    <span className={statusConfig[post.status].text}>{post.status}</span>
+                </div>
+                {post.niche && (
+                    <div className="flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-sky-500/10 text-sky-300">
+                        <TagIcon className="w-3.5 h-3.5"/>
+                        {post.niche}
                     </div>
-                    {post.niche && (
-                        <div className="flex items-center gap-1 text-xs font-semibold px-2.5 py-0.5 rounded-full border bg-sky-500/20 text-sky-300 border-sky-500/30">
-                            <TagIcon className="w-3 h-3"/>
-                            {post.niche}
-                        </div>
-                    )}
-                </div>
-                <div className="flex items-center space-x-2">
-                    {post.platforms.map(platform => {
-                    const Icon = platformIcons[platform];
-                    return <Icon key={platform} className="w-5 h-5 text-gray-400" />;
-                    })}
-                </div>
+                )}
             </div>
             
-            <div className="text-xs text-gray-400 border-t border-gray-700 pt-2">
-                Scheduled for: {formattedDate}
+            <div className="text-xs text-[var(--text-secondary)] border-t border-[var(--border-color)] pt-2">
+                Scheduled: <span className="font-semibold text-[var(--text-primary)]">{formattedDate}</span>
             </div>
         </div>
       </div>

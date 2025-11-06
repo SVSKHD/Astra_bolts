@@ -1,8 +1,7 @@
-
 import React from 'react';
 import { Post } from '../types';
 import PostCard from './PostCard';
-import { CalendarIcon } from './IconComponents';
+import { BoltIcon } from './IconComponents';
 
 interface PostListProps {
   posts: Post[];
@@ -12,10 +11,10 @@ interface PostListProps {
 const PostList: React.FC<PostListProps> = ({ posts, onDeletePost }) => {
   if (posts.length === 0) {
     return (
-      <div className="text-center py-16 border-2 border-dashed border-gray-700 rounded-lg">
-        <CalendarIcon className="mx-auto h-12 w-12 text-gray-500" />
-        <h3 className="mt-2 text-lg font-medium text-gray-300">No posts scheduled</h3>
-        <p className="mt-1 text-sm text-gray-500">Get started by creating a new post.</p>
+      <div className="text-center py-20 px-6 border-2 border-dashed border-[var(--border-color)] rounded-lg bg-[var(--bg-secondary)]/50">
+        <BoltIcon className="mx-auto h-12 w-12 text-gray-600" />
+        <h3 className="mt-4 text-lg font-semibold text-white">Your Dashboard is Empty</h3>
+        <p className="mt-1 text-sm text-[var(--text-secondary)]">Click 'Create Post' to schedule your first piece of content.</p>
       </div>
     );
   }
