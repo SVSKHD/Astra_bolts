@@ -11,11 +11,12 @@ const Dashboard: React.FC = () => {
   const [isCreatorOpen, setIsCreatorOpen] = useState(false);
   const [view, setView] = useState<'list' | 'calendar'>('list');
 
-  const handleCreatePost = useCallback((newPost: Omit<Post, 'id' | 'status'>) => {
+  const handleCreatePost = useCallback((newPost: Omit<Post, 'id' | 'status' | 'mediaPreviewUrls'>) => {
     const postWithId: Post = {
       ...newPost,
-      id: new Date().toISOString() + Math.random(), // Add random number to ensure unique ID
+      id: new Date().toISOString() + Math.random(),
       status: PostStatus.Scheduled,
+      mediaPreviewUrls: newPost.mediaFiles.map(file => URL.createObjectURL(file)),
     };
     setPosts(prevPosts => [...prevPosts, postWithId].sort((a, b) => b.scheduledAt.getTime() - a.scheduledAt.getTime()));
     setIsCreatorOpen(false);

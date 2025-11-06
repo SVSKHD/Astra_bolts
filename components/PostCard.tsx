@@ -1,6 +1,6 @@
 import React from 'react';
 import { Post, PostStatus, SocialPlatform } from '../types';
-import { InstagramIcon, FacebookIcon, TwitterIcon, LinkedInIcon, TikTokIcon, TrashIcon, TagIcon } from './IconComponents';
+import { InstagramIcon, FacebookIcon, TwitterIcon, LinkedInIcon, TikTokIcon, TrashIcon, TagIcon, LayersIcon } from './IconComponents';
 
 interface PostCardProps {
   post: Post;
@@ -30,21 +30,31 @@ const PostCard: React.FC<PostCardProps> = ({ post, onDelete }) => {
     hour12: true,
   }).format(post.scheduledAt);
 
+  const firstMediaUrl = post.mediaPreviewUrls[0];
+  const firstMediaFile = post.mediaFiles[0];
+  const isImage = firstMediaFile?.type.startsWith('image/');
+  const hasMultipleMedia = post.mediaFiles.length > 1;
+
   return (
     <div className="bg-[var(--bg-secondary)] rounded-xl shadow-lg overflow-hidden flex flex-col group relative border border-[var(--border-color)] hover:border-indigo-500/50 transition-all duration-300">
         <button 
             onClick={onDelete} 
-            className="absolute top-3 right-3 z-10 p-2 bg-red-600/50 hover:bg-red-600 text-white rounded-full transition-all scale-0 group-hover:scale-100 opacity-0 group-hover:opacity-100 duration-200"
+            className="absolute top-3 right-3 z-20 p-2 bg-red-600/50 hover:bg-red-600 text-white rounded-full transition-all scale-0 group-hover:scale-100 opacity-0 group-hover:opacity-100 duration-200"
             aria-label="Delete post"
         >
             <TrashIcon className="w-5 h-5"/>
         </button>
+        {hasMultipleMedia && (
+            <div className="absolute top-3 left-3 z-20 p-2 bg-black/50 text-white rounded-full" aria-label="Multiple media">
+                <LayersIcon className="w-5 h-5"/>
+            </div>
+        )}
 
       <div className="relative aspect-square w-full bg-gray-700">
-        {post.mediaType === 'image' ? (
-          <img src={post.mediaPreviewUrl} alt="Post media" className="w-full h-full object-cover" />
+        {isImage ? (
+          <img src={firstMediaUrl} alt="Post media" className="w-full h-full object-cover" />
         ) : (
-          <video src={post.mediaPreviewUrl} className="w-full h-full object-cover" muted loop playsInline />
+          <video src={firstMediaUrl} className="w-full h-full object-cover" muted loop playsInline />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
         <div className="absolute bottom-0 left-0 p-4 w-full">

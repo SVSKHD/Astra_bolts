@@ -98,7 +98,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({ posts }) => {
                 <div className="flex-grow overflow-y-auto space-y-1.5 -mr-2 pr-2 mt-1">
                     {postsForDay.slice(0, 2).map(post => (
                         <div key={post.id} className="bg-gray-700/50 p-1 rounded-md text-xs flex items-center gap-1.5 cursor-pointer hover:bg-gray-700/80">
-                             <img src={post.mediaPreviewUrl} alt="media" className="w-5 h-5 rounded-sm object-cover flex-shrink-0" />
+                             <img src={post.mediaPreviewUrls[0]} alt="media" className="w-5 h-5 rounded-sm object-cover flex-shrink-0" />
                              <p className="truncate text-gray-300 flex-grow">{post.caption || "Post"}</p>
                              <span className={`w-1.5 h-1.5 rounded-full ${statusIndicatorColors[post.status]} flex-shrink-0`}></span>
                         </div>

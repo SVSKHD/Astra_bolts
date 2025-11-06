@@ -1,4 +1,3 @@
-
 export enum SocialPlatform {
   Instagram = 'Instagram',
   Facebook = 'Facebook',
@@ -15,9 +14,8 @@ export enum PostStatus {
 
 export interface Post {
   id: string;
-  mediaFile: File;
-  mediaPreviewUrl: string;
-  mediaType: 'image' | 'video';
+  mediaFiles: File[];
+  mediaPreviewUrls: string[];
   caption: string;
   platforms: SocialPlatform[];
   scheduledAt: Date;

@@ -1,4 +1,3 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 
 const fileToBase64 = (file: File): Promise<string> => {
@@ -14,7 +13,7 @@ const fileToBase64 = (file: File): Promise<string> => {
     });
 };
 
-export const generateCaption = async (imageFile: File): Promise<string> => {
+export const generateCaption = async (imageFile: File, suggestedFormat?: 'Photo' | 'Reel'): Promise<string> => {
     if (!process.env.API_KEY) {
         throw new Error("API_KEY environment variable not set");
     }
@@ -31,8 +30,13 @@ export const generateCaption = async (imageFile: File): Promise<string> => {
             },
         };
 
+        const prompt = suggestedFormat
+            ? `Based on this image, which is best suited as a social media ${suggestedFormat}, generate an engaging caption. The caption should be descriptive, evoke emotion, and end with 3-5 relevant hashtags.`
+            : "Generate a catchy and engaging social media caption for this image. Include 3-5 relevant hashtags.";
+
+
         const textPart = {
-            text: "Generate a catchy and engaging social media caption for this image. Include 3-5 relevant hashtags."
+            text: prompt
         };
 
         const response = await ai.models.generateContent({
