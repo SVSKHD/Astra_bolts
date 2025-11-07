@@ -59,15 +59,15 @@ const CalendarView: React.FC<CalendarViewProps> = ({ posts }) => {
   const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
   return (
-    <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg shadow-lg p-4 sm:p-6 text-white">
+    <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg shadow-lg p-4 sm:p-6 text-[var(--text-primary)]">
       <div className="flex justify-between items-center mb-4">
-        <button onClick={goToPreviousMonth} className="p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Previous month">
+        <button onClick={goToPreviousMonth} className="p-2 rounded-full hover:bg-[var(--bg-tertiary-hover)] transition-colors" aria-label="Previous month">
           <ChevronLeftIcon className="w-6 h-6" />
         </button>
         <h2 className="text-xl font-bold">
           {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
         </h2>
-        <button onClick={goToNextMonth} className="p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Next month">
+        <button onClick={goToNextMonth} className="p-2 rounded-full hover:bg-[var(--bg-tertiary-hover)] transition-colors" aria-label="Next month">
           <ChevronRightIcon className="w-6 h-6" />
         </button>
       </div>
@@ -84,22 +84,22 @@ const CalendarView: React.FC<CalendarViewProps> = ({ posts }) => {
             <div
               key={index}
               className={`h-36 rounded-md p-1.5 flex flex-col overflow-hidden transition-colors ${
-                isCurrentMonth ? 'bg-[var(--bg-primary)] hover:bg-black/20' : 'bg-transparent'
+                isCurrentMonth ? 'bg-[var(--bg-primary)] hover:bg-[var(--bg-tertiary-hover)]' : 'bg-transparent'
               }`}
             >
               <div
                 className={`flex items-center justify-center text-sm font-semibold h-7 w-7 rounded-full ${
                   isToday(day) ? 'ring-2 ring-indigo-500 text-indigo-400' : ''
-                } ${isCurrentMonth ? 'text-gray-200' : 'text-gray-700'}`}
+                } ${isCurrentMonth ? 'text-[var(--text-primary)]' : 'text-[var(--text-disabled)]'}`}
               >
                 {day.getDate()}
               </div>
               {isCurrentMonth && (
                 <div className="flex-grow overflow-y-auto space-y-1.5 -mr-2 pr-2 mt-1">
                     {postsForDay.slice(0, 2).map(post => (
-                        <div key={post.id} className="bg-gray-700/50 p-1 rounded-md text-xs flex items-center gap-1.5 cursor-pointer hover:bg-gray-700/80">
+                        <div key={post.id} className="bg-[var(--bg-tertiary)] p-1 rounded-md text-xs flex items-center gap-1.5 cursor-pointer hover:bg-[var(--bg-tertiary-hover)]">
                              <img src={post.mediaPreviewUrls[0]} alt="media" className="w-5 h-5 rounded-sm object-cover flex-shrink-0" />
-                             <p className="truncate text-gray-300 flex-grow">{post.caption || "Post"}</p>
+                             <p className="truncate text-[var(--text-secondary)] flex-grow">{post.caption || "Post"}</p>
                              <span className={`w-1.5 h-1.5 rounded-full ${statusIndicatorColors[post.status]} flex-shrink-0`}></span>
                         </div>
                     ))}

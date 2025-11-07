@@ -72,7 +72,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, onDelete }) => {
         
         <div className="mt-auto space-y-3">
             <div className="flex items-center gap-2 flex-wrap">
-                <div className={`flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-white/5`}>
+                <div className={`flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-[var(--bg-tertiary)]`}>
                     <span className={`w-2 h-2 rounded-full ${statusConfig[post.status].dot}`}></span>
                     <span className={statusConfig[post.status].text}>{post.status}</span>
                 </div>

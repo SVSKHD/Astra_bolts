@@ -9,21 +9,44 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-      :root {
+      :root { /* Dark Theme (default) */
         --bg-primary: #0D1117;
         --bg-secondary: #161B22;
+        --bg-tertiary: rgba(255, 255, 255, 0.05);
+        --bg-tertiary-hover: rgba(255, 255, 255, 0.1);
+        --header-bg: rgba(16, 21, 28, 0.5); /* #10151c */
         --border-color: #30363D;
         --text-primary: #C9D1D9;
         --text-secondary: #8B949E;
+        --text-disabled: #484f58;
         --accent-glow: rgba(88, 166, 255, 0.3);
         --accent-primary: #58A6FF;
         --accent-secondary: #3B82F6;
+        --code-bg: rgba(0, 0, 0, 0.5);
+        --picker-indicator-filter: invert(0.6) brightness(1.5);
+      }
+      html.light { /* Light Theme */
+        --bg-primary: #F9FAFB;
+        --bg-secondary: #FFFFFF;
+        --bg-tertiary: rgba(0, 0, 0, 0.03);
+        --bg-tertiary-hover: rgba(0, 0, 0, 0.07);
+        --header-bg: rgba(255, 255, 255, 0.5);
+        --border-color: #E5E7EB;
+        --text-primary: #1F2937;
+        --text-secondary: #6B7280;
+        --text-disabled: #D1D5DB;
+        --accent-glow: rgba(59, 130, 246, 0.3);
+        --accent-primary: #3B82F6;
+        --accent-secondary: #2563EB;
+        --code-bg: rgba(0, 0, 0, 0.05);
+        --picker-indicator-filter: invert(0.2) brightness(0.8);
       }
       body {
         font-family: 'Be Vietnam Pro', sans-serif;
         background-color: var(--bg-primary);
         background-image: radial-gradient(circle at 1px 1px, var(--border-color) 1px, transparent 0);
         background-size: 2rem 2rem;
+        transition: background-color 0.3s ease;
       }
       /* Custom scrollbar for a more modern look */
       ::-webkit-scrollbar {
@@ -42,7 +65,7 @@
       }
       /* Custom styling for datetime-local icon */
       input[type="datetime-local"]::-webkit-calendar-picker-indicator {
-        filter: invert(0.6) brightness(1.5);
+        filter: var(--picker-indicator-filter);
         cursor: pointer;
       }
     </style>

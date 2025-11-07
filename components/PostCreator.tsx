@@ -180,10 +180,10 @@ const PostCreator: React.FC<PostCreatorProps> = ({ onCreatePost, onClose }) => {
   }, []);
 
   return (
-    <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg p-6 max-w-2xl w-full text-white relative shadow-2xl shadow-black/50">
+    <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg p-6 max-w-2xl w-full text-[var(--text-primary)] relative shadow-2xl shadow-black/50">
       <div className="flex justify-between items-center mb-6 pb-4 border-b border-[var(--border-color)]">
         <h2 className="text-2xl font-bold">Create New Post</h2>
-        <button onClick={onClose} className="p-1 rounded-full hover:bg-white/10 transition-colors">
+        <button onClick={onClose} className="p-1 rounded-full hover:bg-[var(--bg-tertiary-hover)] transition-colors">
             <XIcon className="w-6 h-6"/>
         </button>
       </div>
@@ -214,7 +214,7 @@ const PostCreator: React.FC<PostCreatorProps> = ({ onCreatePost, onClose }) => {
                     </div>
                 ))}
                 
-                <label htmlFor="file-upload" className="relative aspect-square flex flex-col items-center justify-center text-center bg-white/5 hover:bg-white/10 rounded-md cursor-pointer transition-colors text-[var(--text-secondary)]">
+                <label htmlFor="file-upload" className="relative aspect-square flex flex-col items-center justify-center text-center bg-[var(--bg-tertiary)] hover:bg-[var(--bg-tertiary-hover)] rounded-md cursor-pointer transition-colors text-[var(--text-secondary)]">
                     <PlusIcon className="w-6 h-6" />
                     <span className="text-xs mt-1">Add Media</span>
                     <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={handleFileChange} accept="image/*,video/*" multiple />
@@ -263,7 +263,7 @@ const PostCreator: React.FC<PostCreatorProps> = ({ onCreatePost, onClose }) => {
                 {Object.values(SocialPlatform).map(platform => {
                   const config = platformConfig[platform];
                   return (
-                    <button key={platform} type="button" onClick={() => handlePlatformToggle(platform)} className={`p-2 rounded-lg transition-all duration-200 border-2 ${selectedPlatforms.has(platform) ? 'border-indigo-500 bg-indigo-500/10' : 'border-transparent bg-[var(--bg-primary)] hover:bg-white/5'}`} aria-label={`Select ${config.name}`}>
+                    <button key={platform} type="button" onClick={() => handlePlatformToggle(platform)} className={`p-2 rounded-lg transition-all duration-200 border-2 ${selectedPlatforms.has(platform) ? 'border-indigo-500 bg-indigo-500/10' : 'border-transparent bg-[var(--bg-primary)] hover:bg-[var(--bg-tertiary)]'}`} aria-label={`Select ${config.name}`}>
                       <config.icon className="w-6 h-6" />
                     </button>
                   );
@@ -275,7 +275,7 @@ const PostCreator: React.FC<PostCreatorProps> = ({ onCreatePost, onClose }) => {
                     <CalendarIcon className="w-5 h-5"/>
                     Schedule Time
                 </label>
-                <input type="datetime-local" id="schedule" name="schedule" value={scheduledAt} onChange={(e) => setScheduledAt(e.target.value)} min={minDateTime} className="mt-1 w-full text-white appearance-none bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-md py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
+                <input type="datetime-local" id="schedule" name="schedule" value={scheduledAt} onChange={(e) => setScheduledAt(e.target.value)} min={minDateTime} className="mt-1 w-full text-[var(--text-primary)] appearance-none bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-md py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
             </div>
           </div>
         </div>
@@ -312,7 +312,7 @@ const PostCreator: React.FC<PostCreatorProps> = ({ onCreatePost, onClose }) => {
                             key={index}
                             type="button"
                             onClick={() => setNiche(s_niche)}
-                            className="px-2.5 py-1 bg-white/5 hover:bg-white/10 text-xs text-[var(--text-secondary)] rounded-full transition-colors"
+                            className="px-2.5 py-1 bg-[var(--bg-tertiary)] hover:bg-[var(--bg-tertiary-hover)] text-xs text-[var(--text-secondary)] rounded-full transition-colors"
                         >
                             {s_niche}
                         </button>
@@ -322,7 +322,7 @@ const PostCreator: React.FC<PostCreatorProps> = ({ onCreatePost, onClose }) => {
         </div>
         
         <div className="flex justify-end gap-3 pt-6 border-t border-[var(--border-color)]">
-          <button type="button" onClick={onClose} className="px-4 py-2 bg-white/10 text-white font-semibold rounded-lg hover:bg-white/20 transition-colors">Cancel</button>
+          <button type="button" onClick={onClose} className="px-4 py-2 bg-[var(--bg-tertiary-hover)] text-[var(--text-primary)] font-semibold rounded-lg hover:bg-white/20 transition-colors">Cancel</button>
           <button type="submit" className="px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold rounded-lg shadow-md hover:shadow-indigo-500/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed">Schedule Post</button>
         </div>
       </form>

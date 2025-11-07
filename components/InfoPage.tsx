@@ -39,11 +39,11 @@ const platformInfo = {
 
 const InfoPage: React.FC<InfoPageProps> = ({ onBack }) => {
     return (
-        <div className="container mx-auto max-w-4xl text-white">
+        <div className="container mx-auto max-w-4xl text-[var(--text-primary)]">
             <div className="mb-8">
                 <button
                     onClick={onBack}
-                    className="flex items-center gap-2 text-sm font-semibold text-[var(--text-secondary)] hover:text-white transition-colors mb-4"
+                    className="flex items-center gap-2 text-sm font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mb-4"
                 >
                     <ChevronLeftIcon className="w-5 h-5" />
                     Back to Dashboard
@@ -60,15 +60,15 @@ const InfoPage: React.FC<InfoPageProps> = ({ onBack }) => {
                     return (
                         <div key={platform.name} className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg p-6">
                             <div className="flex items-center gap-4 mb-3">
-                                <Icon className="w-8 h-8 text-gray-300" />
+                                <Icon className="w-8 h-8 text-[var(--text-secondary)]" />
                                 <h3 className="text-xl font-bold">{platform.name}</h3>
                             </div>
                             <p className="text-[var(--text-secondary)] mb-4">{platform.description}</p>
                             <div className="mb-4">
-                                <h4 className="text-sm font-semibold text-gray-300 mb-2">Required Permissions/Scopes:</h4>
+                                <h4 className="text-sm font-semibold text-[var(--text-primary)] mb-2">Required Permissions/Scopes:</h4>
                                 <div className="flex flex-wrap gap-2">
                                     {platform.permissions.map(p => (
-                                        <code key={p} className="text-xs bg-black/50 text-indigo-300 px-2 py-1 rounded">{p}</code>
+                                        <code key={p} className="text-xs bg-[var(--code-bg)] text-indigo-400 px-2 py-1 rounded">{p}</code>
                                     ))}
                                 </div>
                             </div>

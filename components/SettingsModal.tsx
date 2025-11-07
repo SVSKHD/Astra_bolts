@@ -48,10 +48,10 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ onClose, onNavigateToInfo
     };
 
     return (
-        <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg p-6 max-w-xl w-full text-white relative shadow-2xl shadow-black/50">
+        <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg p-6 max-w-xl w-full text-[var(--text-primary)] relative shadow-2xl shadow-black/50">
             <div className="flex justify-between items-center mb-4 pb-4 border-b border-[var(--border-color)]">
                 <h2 className="text-2xl font-bold">Platform API Keys</h2>
-                <button onClick={onClose} className="p-1 rounded-full hover:bg-white/10 transition-colors">
+                <button onClick={onClose} className="p-1 rounded-full hover:bg-[var(--bg-tertiary-hover)] transition-colors">
                     <XIcon className="w-6 h-6"/>
                 </button>
             </div>
@@ -68,7 +68,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ onClose, onNavigateToInfo
                     return (
                         <div key={platform}>
                             <label className="flex items-center gap-2 text-sm font-medium text-[var(--text-primary)] mb-1">
-                                <Icon className="w-5 h-5 text-gray-400" />
+                                <Icon className="w-5 h-5 text-[var(--text-secondary)]" />
                                 {name}
                             </label>
                             <input
@@ -84,7 +84,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ onClose, onNavigateToInfo
             </div>
             <div className="flex justify-end items-center gap-4 pt-6 mt-6 border-t border-[var(--border-color)]">
                 {saved && <span className="text-green-400 text-sm transition-opacity duration-300">Saved successfully!</span>}
-                <button type="button" onClick={onClose} className="px-4 py-2 bg-white/10 text-white font-semibold rounded-lg hover:bg-white/20 transition-colors">Close</button>
+                <button type="button" onClick={onClose} className="px-4 py-2 bg-[var(--bg-tertiary-hover)] text-[var(--text-primary)] font-semibold rounded-lg hover:bg-white/20 transition-colors">Close</button>
                 <button type="button" onClick={handleSave} className="px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold rounded-lg hover:shadow-indigo-500/40 transition-all">Save Keys</button>
             </div>
         </div>

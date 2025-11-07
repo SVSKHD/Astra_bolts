@@ -54,19 +54,19 @@ const Dashboard: React.FC = () => {
   return (
     <div className="container mx-auto">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-        <h1 className="text-4xl font-extrabold text-white tracking-tight">Dashboard</h1>
+        <h1 className="text-4xl font-extrabold text-[var(--text-primary)] tracking-tight">Dashboard</h1>
         <div className="flex items-center gap-4">
             <div className="flex items-center gap-1 p-1 bg-[var(--bg-secondary)] rounded-lg border border-[var(--border-color)]">
                 <button 
                     onClick={() => setView('list')} 
-                    className={`px-3 py-1.5 rounded-md transition-all text-sm font-semibold ${view === 'list' ? 'bg-indigo-600 text-white shadow-md' : 'text-[var(--text-secondary)] hover:text-white'}`}
+                    className={`px-3 py-1.5 rounded-md transition-all text-sm font-semibold ${view === 'list' ? 'bg-indigo-600 text-white shadow-md' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
                     aria-label="List view"
                 >
                     <ListIcon className="w-5 h-5" />
                 </button>
                 <button 
                     onClick={() => setView('calendar')} 
-                    className={`px-3 py-1.5 rounded-md transition-all text-sm font-semibold ${view === 'calendar' ? 'bg-indigo-600 text-white shadow-md' : 'text-[var(--text-secondary)] hover:text-white'}`}
+                    className={`px-3 py-1.5 rounded-md transition-all text-sm font-semibold ${view === 'calendar' ? 'bg-indigo-600 text-white shadow-md' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
                     aria-label="Calendar view"
                 >
                     <CalendarIcon className="w-5 h-5" />
